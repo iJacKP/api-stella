@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const SemesterSubjectSchema = new mongoose.Schema({
   name: String,
+  subjectCode: String,
   track: String,
   teacher: String,
   semester: Number,
