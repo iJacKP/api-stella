@@ -20,4 +20,4 @@ const SemesterSubjectSchema = new mongoose.Schema({
   description: String
 });
 
-module.exports = mongoose.model('SemesterSubject', SemesterSubjectSchema);
+module.exports = mongoose.model('semester_subjects', SemesterSubjectSchema);
