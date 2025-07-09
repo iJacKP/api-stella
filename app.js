@@ -8,7 +8,21 @@ const subjectRoutes = require('./routes/subjectRoutes');
 
 const app = express();
 
-app.use(cors({ origin: "http://localhost:5173" }));
+const allowedOrigins = [
+  'https://app-stella.vercel.app',
+  'http://localhost:8080'
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+}));
+
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
