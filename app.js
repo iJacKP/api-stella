@@ -10,7 +10,7 @@ const app = express();
 
 const allowedOrigins = [
   'https://app-stella.vercel.app',
-  'http://localhost:8080'
+  'http://localhost:5173'
 ];
 
 app.use(cors({
