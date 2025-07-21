@@ -25,29 +25,39 @@ exports.createSubjects = async (req, res) => {
   }
 };
 
-// exports.updateSubjectSchedule = async (req, res) => {
-//   const { id } = req.params; // ID da disciplina na URL
-//   const { schedule } = req.body; // Novo array de horários no body
+exports.updateSubject = async (req, res) => {
+  const { subjectCode } = req.params;
+  const updates = req.body;
 
-//   try {
-//     const updated = await Subject.findByIdAndUpdate(
-//       id,
-//       { schedule },
-//       { new: true } // Retorna o documento atualizado
-//     );
+  try {
+    const updated = await Subject.findOneAndUpdate(
+      { subjectCode },
+      updates,
+      { new: true }
+    );
 
-//     if (!updated) {
-//       return res.status(404).json({ message: "Disciplina não encontrada" });
-//     }
+    if (!updated) {
+      return res.status(404).json({ msg: "Disciplina não encontrada!" });
+    }
 
-//     res.status(200).json({
-//       message: "Horários atualizados com sucesso!",
-//       subject: updated
-//     });
-//   } catch (err) {
-//     res.status(500).json({
-//       message: "Erro ao atualizar os horários",
-//       error: err.message
-//     });
-//   }
-// };
+    res.status(200).json({ msg: "Disciplina atualizada com sucesso!", updated });
+  } catch (err) {
+    res.status(500).json({ msg: "Erro no servidor", error: err.message });
+  }
+};
+
+exports.deleteSubject = async (req, res) => {
+  const { subjectCode } = req.params;
+
+  try {
+    const deleted = await Subject.findOneAndDelete({ subjectCode });
+
+    if (!deleted) {
+      return res.status(404).json({ msg: "Disciplina não encontrada!" });
+    }
+
+    res.status(200).json({ msg: "Disciplina removida com sucesso!" });
+  } catch (err) {
+    res.status(500).json({ msg: "Erro no servidor", error: err.message });
+  }
+};

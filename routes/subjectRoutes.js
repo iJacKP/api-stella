@@ -1,8 +1,9 @@
 const router = require('express').Router();
-const semesterController = require('../controllers/subjectController');
+const subjectController = require('../controllers/subjectController');
 
-router.get('/', semesterController.getAllSubjects);
-router.post('/', semesterController.createSubjects);
-// router.patch('/semester/:id/schedule', semesterController.updateSubjectSchedule);
+router.get('/', subjectController.getAllSubjects);
+router.post('/', subjectController.createSubjects);
+router.put('/:subjectCode', subjectController.updateSubject);
+router.delete('/:subjectCode', subjectController.deleteSubject);
 
 module.exports = router;
